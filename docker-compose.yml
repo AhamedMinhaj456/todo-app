@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todo_app
     ports:
-      - "3206:3206"
+      - "3206:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
