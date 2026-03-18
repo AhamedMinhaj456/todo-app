@@ -9,7 +9,7 @@ export default function Navbar() {
             Todo App
           </h1>
           <p className="text-xs text-slate-500 sm:text-sm">
-            Manage your latest tasks efficiently
+            Manage your tasks efficiently
           </p>
         </div>
 

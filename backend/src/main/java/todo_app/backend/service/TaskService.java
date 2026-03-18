@@ -28,7 +28,7 @@ public class TaskService {
     }
 
     public List<TaskResponse> getLatestTasks() {
-        return taskRepository.findTop5ByCompletedFalseOrderByCreatedAtDesc()
+        return taskRepository.findTop5ByCompletedFalseOrderByCreatedAtDescIdDesc()
                 .stream()
                 .map(this::mapToResponse)
                 .toList();

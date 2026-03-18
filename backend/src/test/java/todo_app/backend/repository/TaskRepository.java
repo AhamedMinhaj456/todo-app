@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    default List<Task> findTop5ByCompletedFalseOrderByCreatedAtDescIdDesc() {
-        return null;
-    }
+    List<Task> findTop5ByCompletedFalseOrderByCreatedAtDescIdDesc();
 }
