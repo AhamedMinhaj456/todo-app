@@ -52,14 +52,11 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-slate-900">
               Most Recent Tasks
             </h2>
-            <p className="text-sm text-slate-500">
-              View the latest 5 tasks added to your todo app.
-            </p>
           </div>
 
           <Link
             to="/tasks"
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             Open Task Manager
           </Link>

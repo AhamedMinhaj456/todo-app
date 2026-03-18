@@ -1,18 +1,20 @@
-
-import {  useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 
-
 type TaskFormProps = {
-  onAddTask: (title: string, description: string) => void;
+  onAddTask: (title: string, description: string) => Promise<void> | void;
+  isSubmitting?: boolean;
 };
 
-export default function TaskForm({ onAddTask }: TaskFormProps) {
+export default function TaskForm({
+  onAddTask,
+  isSubmitting = false,
+}: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const trimmedTitle = title.trim();
@@ -23,12 +25,14 @@ export default function TaskForm({ onAddTask }: TaskFormProps) {
       return;
     }
 
-    
-
-    onAddTask(trimmedTitle, trimmedDescription);
-    setTitle("");
-    setDescription("");
-    setError("");
+    try {
+      setError("");
+      await onAddTask(trimmedTitle, trimmedDescription);
+      setTitle("");
+      setDescription("");
+    } catch {
+      setError("Failed to add task.");
+    }
   };
 
   return (
@@ -56,7 +60,8 @@ export default function TaskForm({ onAddTask }: TaskFormProps) {
             placeholder="Enter task title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            disabled={isSubmitting}
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:bg-slate-100"
             maxLength={60}
           />
         </div>
@@ -74,7 +79,8 @@ export default function TaskForm({ onAddTask }: TaskFormProps) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={5}
-            className="w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            disabled={isSubmitting}
+            className="w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:bg-slate-100"
             maxLength={500}
           />
         </div>
@@ -87,9 +93,17 @@ export default function TaskForm({ onAddTask }: TaskFormProps) {
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 active:scale-[0.99] sm:w-auto"
+          disabled={isSubmitting}
+          className="inline-flex w-full items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-emerald-400 sm:w-auto"
         >
-          Add Task
+          {isSubmitting ? (
+            <span className="flex items-center gap-2">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              Adding...
+            </span>
+          ) : (
+            "Add Task"
+          )}
         </button>
       </form>
     </div>

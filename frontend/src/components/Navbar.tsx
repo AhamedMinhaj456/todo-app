@@ -2,35 +2,41 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="flex w-full items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">
-            Todo App
-          </h1>
-          <p className="text-xs text-slate-500 sm:text-sm">
-            Manage your tasks efficiently
-          </p>
+    <header className="sticky top-0 z-50 w-full bg-black text-white shadow">
+      <div className="flex w-full items-center items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex items-center">
+          <div>
+            <h1 className="text-lg font-semibold tracking-wide sm:text-xl">
+              Todo App
+            </h1>
+            <p className="text-xs text-slate-300 sm:text-sm">
+              Smart task manager
+            </p>
+          </div>
         </div>
 
-        <nav className="flex items-center gap-3 sm:gap-4">
+        <nav className="hidden items-center gap-8 md:flex">
           <Link
             to="/"
-            className="text-sm font-medium text-slate-600 transition hover:text-blue-600"
+            className="text-sm font-medium text-white transition hover:text-emerald-400"
           >
             Home
           </Link>
           <Link
             to="/tasks"
-            className="text-sm font-medium text-slate-600 transition hover:text-blue-600"
+            className="text-sm font-medium text-white transition hover:text-emerald-400"
           >
-            Tasks
+            Manage Tasks
           </Link>
+          
+        </nav>
 
-          <div className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 sm:text-sm">
+        <div className="flex items-center gap-3">
+          <div className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-slate-200 sm:block">
             Ahamed Minhaj
           </div>
-        </nav>
+
+        </div>
       </div>
     </header>
   );

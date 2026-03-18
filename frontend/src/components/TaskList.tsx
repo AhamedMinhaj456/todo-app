@@ -3,6 +3,7 @@ import type { Task } from "../types/task";
 type TaskListProps = {
   tasks: Task[];
   onCompleteTask: (id: string) => void;
+  completingTaskId?: string | null;
 };
 
 export default function TaskList({ tasks, onCompleteTask }: TaskListProps) {
@@ -13,14 +14,9 @@ export default function TaskList({ tasks, onCompleteTask }: TaskListProps) {
           <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">
             Recent Tasks
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
-            Only the latest 5 incomplete tasks are shown.
-          </p>
+          
         </div>
 
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-          {tasks.length} visible
-        </span>
       </div>
 
       {tasks.length === 0 ? (
